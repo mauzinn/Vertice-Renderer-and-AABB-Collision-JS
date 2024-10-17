@@ -13,3 +13,23 @@ export class FramesUpdate {
         return false;
     }
 }
+
+export class FramesPerSecond {
+    constructor() {
+        this.fps = 0;
+        this.lastTime = 0;
+    }
+
+    Update(time) {
+        this.fps = 1000 / (time - this.lastTime);
+        this.lastTime = time;
+    }
+
+    Get() {
+        return this.fps;
+    }
+    
+    Drawn(display, position) {
+        display.DrawnText(Math.floor(this.fps), position, 50);
+    }
+}

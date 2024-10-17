@@ -9,7 +9,7 @@ const objects = [];
 
 import { Display } from "./classes/display.js";
 import { Polygon } from "./classes/polygon.js";
-import { FramesUpdate } from "./classes/frames.js";
+import { FramesUpdate, FramesPerSecond } from "./classes/frames.js";
 import { Vector2 } from "./classes/vector.js";
 import { AABB_COLLISION } from "./classes/physics.js";
 import { InputController } from "./classes/inputController.js";
@@ -28,7 +28,8 @@ window.addEventListener("load", () => {
     const display = new Display(canvas_data, context, true);
     const world = new AABB_COLLISION();
     const input = new InputController({ w: true, s: true, d: true, a: true });
-    const update_display_time = new FramesUpdate(24);
+    const update_display_time = new FramesUpdate(32);
+    const frames_per_pecond = new FramesPerSecond();
 
     function Loop(time) {
         requestAnimationFrame(Loop);
@@ -41,6 +42,8 @@ window.addEventListener("load", () => {
 
         if (update_display_time.CanBeUpdated(time)) {
             display.Update(objects);
+            frames_per_pecond.Update(time);
+            frames_per_pecond.Drawn(display, new Vector2(25, 50));
 
             if (world.isColliding(Square1, Square3) || world.isColliding(Square1, Square2)) {
                 Square1.isColliding = true;

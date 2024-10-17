@@ -7,14 +7,14 @@ export class Display {
 
     Update(objects) {
         this.Clear();
-        this.Draw(objects);
+        this.Drawn(objects);
     }
 
     Clear() {
         this.context.clearRect(0, 0, this.canvas_data.width, this.canvas_data.height);
     }
 
-    Draw(objects) {
+    Drawn(objects) {
         objects.forEach((object) => {
             let all_vertices = [];
 
@@ -44,5 +44,13 @@ export class Display {
                 }
             }
         });
+    }
+
+    DrawnText(text, position, size) {
+        this.context.beginPath();
+        this.context.font = size + "px serif";
+        this.context.fillStyle = "black";
+        this.context.fillText(text, position.x, position.y, size);
+        this.context.closePath();
     }
 }
