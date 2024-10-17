@@ -45,7 +45,7 @@ window.addEventListener("load", () => {
             frames_per_pecond.Update(time);
             frames_per_pecond.Drawn(display, new Vector2(25, 50));
 
-            if (world.isColliding(Square1, Square3) || world.isColliding(Square1, Square2)) {
+            if (world.isColliding(Square1, [Square2, Square3])) {
                 Square1.isColliding = true;
             } else {
                 Square1.isColliding = false;
